@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os 
+import cloudinary
+import cloudinary_storage
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +46,9 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'accounts',
     'band',
+    'drf_yasg',
+    'cloudinary_storage',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'main_p.urls'
@@ -84,6 +92,10 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# database_url = os.environ.get("DATABASE_URL")
+# DATABASES["default"] = dj_database_url.parse(database_url)
+# DATABASES["default"] = dj_database_url.parse("postgres://globalvibes_user:jOszxLjYQm0qgI21GaL7cFXB6KbNZwfd@dpg-cn17vked3nmc738lb02g-a.oregon-postgres.render.com/global_vibes_db_22bn")
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -129,7 +141,53 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+
+# Define the root directory for static files.
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/root')
+
+# Define the directory where your static files are located.
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+# Define the root directory for media files.
+MEDIA_URL = '/LiveNationGlobal_image_media/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'ddirw9v0d',
+    'API_KEY': '736136276635934',
+    'API_SECRET': '8ePybnqjE4xP9HlGMhT_jyUiiTI'
+}
+
+CKEDITOR_BASEPATH = "/static/root/ckeditor/ckeditor/"
+CKEDITOR_UPLOAD_PATH = 'uploads/'  
+CKEDITOR_IMAGE_BACKEND = "ckeditor_uploader.backends.PillowBackend"
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_JQUERY_URL = 'https://code.jquery.com/jquery-3.6.0.min.js'  # Use the appropriate jQuery version
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+    },
+}
+# CKEditor jQuery URL
+CKEDITOR_JQUERY_URL = 'https://code.jquery.com/jquery-3.6.0.min.js'
+
+# CKEditor Uploader settings
+CKEDITOR_ALLOW_NONIMAGE_FILES = True  # Disallow non-image file uploads (can be True if needed).
+CKEDITOR_RESTRICT_BY_USER = True  # Restrict file uploads to the current user.
+CKEDITOR_FILENAME_GENERATOR = 'ckeditor_uploader.utils.get_filename'
+
+# CKEditor Uploader views (optional, for more advanced usage)
+CKEDITOR_BROWSE_SHOW_DIRS = True
+CKEDITOR_BROWSE_SHOW_HIDDEN = False
+CKEDITOR_BROWSE_SHOW_INFO = True
+
+# CKEditor media settings
+CKEDITOR_MEDIA_PREFIX = '/media/ckeditor/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
