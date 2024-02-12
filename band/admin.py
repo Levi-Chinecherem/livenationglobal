@@ -11,12 +11,6 @@ class CommonFieldsInline(admin.StackedInline):
     model = CommonFields
     can_delete = False
 
-@admin.register(Membership)
-class MembershipAdmin(admin.ModelAdmin):
-    inlines = [CommonFieldsInline]
-    list_display = ('user', 'band', 'membership_type', 'preferred_payment_type')
-    search_fields = ('user__email', 'band__name', 'membership_type__name')
-
 @admin.register(Band)
 class BandAdmin(admin.ModelAdmin):
     list_display = ('name', 'description')

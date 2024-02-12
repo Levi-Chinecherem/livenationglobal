@@ -36,6 +36,7 @@ class CommonFields(models.Model):
     country = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
+    membership = models.OneToOneField('Membership', on_delete=models.CASCADE, related_name='common_fields')
 
     class Meta:
         verbose_name = "Members Common Fields"
@@ -54,7 +55,6 @@ class PaymentType(models.Model):
 class Membership(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='memberships')
     band = models.ForeignKey(Band, on_delete=models.CASCADE, related_name='memberships')
-    common_fields = models.OneToOneField(CommonFields, on_delete=models.CASCADE)
     payment_type = models.ForeignKey(PaymentType, on_delete=models.CASCADE)
     membership_type = models.ForeignKey(MembershipType, on_delete=models.CASCADE)
     # Add more fields as needed
