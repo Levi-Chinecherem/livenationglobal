@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'accounts',
     'band',
+    'chat',
     'drf_yasg',
     'cloudinary_storage',
     'cloudinary',
