@@ -21,6 +21,7 @@ These instructions will help you set up and run the project on your local machin
    ```bash
    git clone https://github.com/Levi-Chinecherem/livenationglobal.git
    cd livenationglobal
+
    ```
 2. Install dependencies:
 
@@ -65,6 +66,14 @@ Based on the provided `urls.py` files, here's a complete list of API endpoints f
 - **GET /api/band/bands/[int:band_id](int:band_id)/membership-types/:** List membership types for a specific band.
 - **GET /api/band/membership-types/[int:pk](int:pk)/:** Retrieve details of a specific membership type.
 
+### Chat Endpoints:
+
+- **GET /api/chat/user-chats/:** List all chat messages for the logged-in user.
+- **GET /api/chat/admin-chats/:** List all chat messages for admin users.
+- **GET /api/chat/chats/[int:pk](int:pk)/:** Retrieve details of a specific chat message.
+- **POST /api/chat/user-chats/create/:** Create a new chat message for the logged-in user.
+- **POST /api/chat/admin-chats/create/:** Create a new chat message for admin users.
+
 ### Swagger and ReDoc Documentation:
 
 - **Swagger Documentation:** [http://localhost:8000/swagger/](http://localhost:8000/swagger/)
@@ -93,3 +102,7 @@ If you'd like to contribute to this project, please fork the repository and subm
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+```
+
+```
