@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'accounts',
     'band',
+    'emailing',
     # 'chat',
     'drf_yasg',
     'cloudinary_storage',
@@ -194,3 +195,18 @@ CKEDITOR_MEDIA_PREFIX = '/media/ckeditor/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'osender6@gmail.com'
+EMAIL_HOST_PASSWORD = 'xswfmvbsrdsqctxc'
+EMAIL_USE_SSL = False
+
+# Additional settings for Gmail
+DEFAULT_FROM_EMAIL = 'your-email@gmail.com'  # Set your default 'from' email address
+SERVER_EMAIL = 'your-email@gmail.com'  # Set your server email address
+
+# Set the email timeout (optional)
+EMAIL_TIMEOUT = 100  # seconds
